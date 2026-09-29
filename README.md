@@ -29,14 +29,31 @@ Set `GOOO_LAYA_URL=http://127.0.0.1:8787/v1/systemone` to use a running local
 Laya service. Omit it for deterministic fallback. Model weights stay in the
 local Hugging Face cache and are never included in either Git repository.
 
-## What the prototype generates
+## From the matrix to Gooo source
 
-The runner asks the current Gooo CLI to generate the semantic declaration
-projection, then emits the experimental `if`/condition/assignment body
-patterns into a companion Go file. It does not extend the stable `.gooo`
-grammar or claim that current `gooo generate` compiles executable activity
-bodies. The matrix tests the proposed lowering boundary before any language
-surface or compiler change is promoted.
+The 100-case matrix asks the current Gooo CLI to generate the semantic
+declaration projection, then emits experimental `if`/condition/assignment
+patterns into companion Go files. The matrix still measures this sidecar path;
+it does not invoke Laya-selected routes through the language compiler.
+
+The language repository now has a separate experimental
+[`gooo body-codegen` path](https://github.com/kimjooyoon/meta-ontology-go/blob/dev/docs/language/body-codegen.md)
+on `dev` (merged as PR #1073). It reads an activity's existing `computes`
+string and deterministically emits a stable-ID-marked Go function. Its closed
+first profile covers one `Integer` or `Boolean` input, `let`, local assignment,
+`if/else`, and return; it typechecks accepted output and reports completeness
+and replay digests. For example:
+
+```sh
+go run ./cmd/gooo body-codegen --activity ClampBelowZero \
+  examples/body-codegen/main.gooo.fixture
+```
+
+This command does not add a block-body grammar, alter `gooo generate`, or make
+the runtime execute those bodies. The next integration step is to connect a
+bounded Laya route choice to a source-authoritative body IR, then keep Go
+assembly deterministic and measure behavioral completeness separately from
+statement-lowering completeness.
 
 ## Metrics
 
