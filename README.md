@@ -55,7 +55,9 @@ for a pure conditional return: preserve the branches, use a guard return, or
 join through an explicit result local. Gooo parses and typechecks first; Laya
 chooses only a named route, never writes code, and receives no activity body.
 Missing, malformed, or slow Laya responses select the deterministic `preserve`
-route. The PR is awaiting the language repository's CI checks.
+route. The [implementation PR #1074](https://github.com/kimjooyoon/meta-ontology-go/pull/1074)
+is merged to `dev`; the language CI suite passed. Promotion to `main` is still
+pending.
 
 A 30-call warm local CPU smoke on one fixture measured route-decision p50
 108.48 ms and p95 123.10 ms; Laya selected `preserve` 30/30 times. The process
