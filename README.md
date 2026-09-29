@@ -36,24 +36,40 @@ declaration projection, then emits experimental `if`/condition/assignment
 patterns into companion Go files. The matrix still measures this sidecar path;
 it does not invoke Laya-selected routes through the language compiler.
 
-The language repository now has a separate experimental
+The language repository has an experimental
 [`gooo body-codegen` path](https://github.com/kimjooyoon/meta-ontology-go/blob/dev/docs/language/body-codegen.md)
-on `dev` (merged as PR #1073). It reads an activity's existing `computes`
-string and deterministically emits a stable-ID-marked Go function. Its closed
-first profile covers one `Integer` or `Boolean` input, `let`, local assignment,
-`if/else`, and return; it typechecks accepted output and reports completeness
-and replay digests. For example:
+on `dev` (PR #1073). It reads an activity's existing `computes` string and
+deterministically emits a stable-ID-marked Go function. Its first profile
+covers one `Integer` or `Boolean` input, `let`, local assignment, `if/else`, and
+return; it typechecks accepted output and reports completeness and replay
+digests. For example:
 
 ```sh
 go run ./cmd/gooo body-codegen --activity ClampBelowZero \
   examples/body-codegen/main.gooo.fixture
 ```
 
+The follow-up [PR #1074](https://github.com/kimjooyoon/meta-ontology-go/pull/1074)
+connects the existing typed Laya provider to three eligible lowering shapes
+for a pure conditional return: preserve the branches, use a guard return, or
+join through an explicit result local. Gooo parses and typechecks first; Laya
+chooses only a named route, never writes code, and receives no activity body.
+Missing, malformed, or slow Laya responses select the deterministic `preserve`
+route. The PR is awaiting the language repository's CI checks.
+
+A 30-call warm local CPU smoke on one fixture measured route-decision p50
+108.48 ms and p95 123.10 ms; Laya selected `preserve` 30/30 times. The process
+used 139.5% of one CPU core on average during the batch (about 14% of the
+10-core host) and reached 625 MiB RSS after loading. A cold first call exceeded
+the 3-second planning budget and fell back deterministically. These repeated
+calls measure latency and resources, not route accuracy. Full setup and limits
+are recorded in the linked PR's evaluation document.
+
 This command does not add a block-body grammar, alter `gooo generate`, or make
-the runtime execute those bodies. The next integration step is to connect a
-bounded Laya route choice to a source-authoritative body IR, then keep Go
-assembly deterministic and measure behavioral completeness separately from
-statement-lowering completeness.
+the runtime execute those bodies. The 100-case corpus above remains the
+sidecar baseline; a subsequent experiment should route those source-authoritative
+body IR cases through the compiler command and compare semantic completeness,
+behavioral agreement, compilation, replay, latency, and resource use separately.
 
 ## Metrics
 
