@@ -56,8 +56,10 @@ join through an explicit result local. Gooo parses and typechecks first; Laya
 chooses only a named route, never writes code, and receives no activity body.
 Missing, malformed, or slow Laya responses select the deterministic `preserve`
 route. The [implementation PR #1074](https://github.com/kimjooyoon/meta-ontology-go/pull/1074)
-is merged to `dev`; the language CI suite passed. Promotion to `main` is still
-pending.
+is on `main` through the exact-tree promotion [PR #1079](https://github.com/kimjooyoon/meta-ontology-go/pull/1079).
+The promoted commit is `0299ba548f15ac9550d1c7f742749d5e42948a4a`; its tree
+matches `dev` at `9a9eb42f48ff96141869f6156bf8505036de10d5`. Required main CI
+checks and the promotion proof passed.
 
 A 30-call warm local CPU smoke on one fixture measured route-decision p50
 108.48 ms and p95 123.10 ms; Laya selected `preserve` 30/30 times. The process
