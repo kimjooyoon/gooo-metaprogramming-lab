@@ -67,9 +67,10 @@ are recorded in the linked PR's evaluation document.
 
 This command does not add a block-body grammar, alter `gooo generate`, or make
 the runtime execute those bodies. The 100-case corpus above remains the
-sidecar baseline; a subsequent experiment should route those source-authoritative
-body IR cases through the compiler command and compare semantic completeness,
-behavioral agreement, compilation, replay, latency, and resource use separately.
+sidecar baseline. A separate [compiler-integrated 100-case cohort plan](docs/source-body-codegen-experiment-plan.md)
+defines how to compare source construct coverage, finite-domain behavior,
+compilation, replay, latency, and resources without conflating structural and
+behavioral completeness. It is a plan, not a measured result.
 
 ## Metrics
 
