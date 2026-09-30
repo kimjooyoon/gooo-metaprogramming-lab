@@ -225,7 +225,7 @@ func runMatrix(planPath, outDir, goooBin string) (MatrixReport, error) {
 	if err := os.WriteFile(filepath.Join(generatedDir, "semantic.gooo.go"), goooBase, 0o644); err != nil {
 		return MatrixReport{}, err
 	}
-	module := []byte("module example.org/gooo/metaprogramming-matrix\n\ngo 1.27.0\n")
+	module := []byte("module example.org/gooo/metaprogramming-matrix\n\ngo 1.27.1\n")
 	if err := os.WriteFile(filepath.Join(generatedDir, "go.mod"), module, 0o644); err != nil {
 		return MatrixReport{}, err
 	}

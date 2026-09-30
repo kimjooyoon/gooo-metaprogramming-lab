@@ -430,7 +430,7 @@ func generateCandidate(goooBin string, c Case, id string, ir IR, root string) Ca
 		return result
 	}
 	result.Coverage = scoreCoverage(c.Required, inspectGo(file))
-	mod := []byte("module example.org/gooo-lab/" + c.ID + "/" + id + "\n\ngo 1.27.0\n")
+	mod := []byte("module example.org/gooo-lab/" + c.ID + "/" + id + "\n\ngo 1.27.1\n")
 	if err := os.WriteFile(filepath.Join(generatedDir, "go.mod"), mod, 0o644); err != nil {
 		result.Error = fmt.Sprintf("write candidate go.mod: %v", err)
 		return result
