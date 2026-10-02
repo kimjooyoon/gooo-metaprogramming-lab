@@ -1,5 +1,20 @@
 # Gooo IR Metaprogramming Lab
 
+## Where this study fits — 2026-10-03
+
+This repository records the early Laya route-selection experiments. It is one
+step in Gooo's development: express the assembly plan, choose permitted parts,
+run the result and retain the observations. The dated measurements below refer
+to their original compiler and model revisions.
+
+Current work uses independently trained small Gooo judges and a Go inference SDK.
+Read the [language direction, 한국어](https://github.com/kimjooyoon/meta-ontology-go/blob/dev/docs/language-direction.ko.md),
+[current research](https://github.com/kimjooyoon/gooo-neural-decision-experiments)
+and [public model card](https://huggingface.co/asketeddy/gooo-shared-judgment-tiny-v1)
+for implementation status, measured progress, open problems and research references.
+
+## Original experiment
+
 An experiment in splitting code generation into three jobs:
 
 1. a planner records the task as bounded semantic rules;
